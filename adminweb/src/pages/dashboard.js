@@ -4,15 +4,18 @@ import firebaseApp from "../database/firebase";
 
 const App = props => {
 
+  // Build User Collection in Firebase. 
   const db = firebaseApp.firestore()
   const userCollection = db.collection('users')
 
+// Insert Data Senser 
   const [nameSenser, setNameSenser] = useState('');
   const [typeSenser, setTypeSenser] = useState('');
   const [dateSenser, setDateSenser] = useState('');
   const [latitudeSenser, setLatitudeSenser] = useState('');
   const [longtitudeSenser, setLongtitudeSenser] = useState('');
 
+// Add Data To DataBase in firebase
   async function insertDocument() {
     const documentRef = await userCollection.add({
       nameSenser,
