@@ -7,15 +7,11 @@ const App = props => {
   const db = firebaseApp.firestore()
   const userCollection = db.collection('users')
 
-  // const insert = props => {
-    const [nameSenser, setNameSenser] = useState('');
-    const [typeSenser, setTypeSenser] = useState('');
-    const [dateSenser, setDateSenser] = useState('');
-    const [latitudeSenser, setLatitudeSenser] = useState('');
-    const [longtitudeSenser, setLongtitudeSenser] = useState('');
-//  }
-
-
+  const [nameSenser, setNameSenser] = useState('');
+  const [typeSenser, setTypeSenser] = useState('');
+  const [dateSenser, setDateSenser] = useState('');
+  const [latitudeSenser, setLatitudeSenser] = useState('');
+  const [longtitudeSenser, setLongtitudeSenser] = useState('');
 
   async function insertDocument() {
     const documentRef = await userCollection.add({
@@ -27,10 +23,6 @@ const App = props => {
     })
     alert(`new document has been inserted as ${documentRef.id}`)
   }
-
-  // const delateData
-  // const addData
-  // const updateData
 
   return (
     <div className="dashboard">
@@ -49,7 +41,7 @@ const App = props => {
               <Form.Control
                 placeholder="Name of Senser"
                 value={nameSenser}
-                onChange={e =>  setNameSenser(e.target.value)} />
+                onChange={e => setNameSenser(e.target.value)} />
               <br />
               <Form.Control
                 placeholder="Type of Senser"
