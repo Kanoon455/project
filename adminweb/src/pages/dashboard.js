@@ -1,36 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Form, Button } from "react-bootstrap";
+import firebaseApp from "../database/firebase";
 
-function dashboard() {
+const App = props => {
+
+  // Build User Collection in Firebase. 
+  const db = firebaseApp.firestore()
+  const userCollection = db.collection('users')
+
+// Insert Data Senser 
+  const [nameSenser, setNameSenser] = useState('');
+  const [typeSenser, setTypeSenser] = useState('');
+  const [dateSenser, setDateSenser] = useState('');
+  const [latitudeSenser, setLatitudeSenser] = useState('');
+  const [longtitudeSenser, setLongtitudeSenser] = useState('');
+
+// Add Data To DataBase in firebase
+  async function insertDocument() {
+    const documentRef = await userCollection.add({
+      nameSenser,
+      typeSenser,
+      dateSenser,
+      latitudeSenser,
+      longtitudeSenser
+    })
+    alert(`new document has been inserted as ${documentRef.id}`)
+  }
+
   return (
     <div className="dashboard">
       <div className="container fluid=md">
         <br />
         <Row>
           <Col md={4}>
-            <h2>Welcoome to Dashboard</h2>
+            <h2>Welcome to Dashboard</h2>
           </Col>
-          <Col />
         </Row>
         <br />
 
         <Form>
           <Row>
             <Col>
-              <Form.Control placeholder="Name Senser" />
+              <Form.Control
+                placeholder="Name of Senser"
+                value={nameSenser}
+                onChange={e => setNameSenser(e.target.value)} />
               <br />
-              <Form.Control placeholder="Type of Senser" />
+              <Form.Control
+                placeholder="Type of Senser"
+                value={typeSenser}
+                onChange={e => setTypeSenser(e.target.value)} />
               <br />
-              <Form.Control placeholder="Date" />
+              <Form.Control placeholder="Date"
+                value={dateSenser}
+                onChange={e => setDateSenser(e.target.value)} />
             </Col>
 
             <Col>
-              <Form.Control placeholder="Latitude" />
+              <Form.Control placeholder="Latitude"
+                value={latitudeSenser}
+                onChange={e => setLatitudeSenser(e.target.value)} />
               <br />
-              <Form.Control placeholder="Longtitude" />
+              <Form.Control placeholder="Longtitude"
+                value={longtitudeSenser}
+                onChange={e => setLongtitudeSenser(e.target.value)} />
               <br />
               <div className="d-grid gap-2">
-                <Button variant="success" size="md">
+                <Button variant="success" size="md" onClick={insertDocument}>
                   Submit
                 </Button>
               </div>
@@ -58,21 +94,21 @@ function dashboard() {
               <td>22-03-2022</td>
             </tr>
             <tr>
-            <td>NT-355</td>
+              <td>NT-355</td>
               <td>"CO2"</td>
               <td>39.33</td>
               <td>56.495</td>
               <td>19-03-2022</td>
             </tr>
             <tr>
-            <td>NK-056</td>
+              <td>NK-056</td>
               <td>"CO"</td>
               <td>20.956</td>
               <td>99.369</td>
               <td>20-04-2016</td>
             </tr>
             <tr>
-            <td>BK-123</td>
+              <td>BK-123</td>
               <td>"PM2.5"</td>
               <td>23.786</td>
               <td>91.612</td>
@@ -85,4 +121,4 @@ function dashboard() {
   );
 }
 
-export default dashboard;
+export default App;

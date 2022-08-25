@@ -30,6 +30,7 @@ export default function SignIn() {
   return (
     <div > 
       <div>
+        <br/>
         {!user ? (
           <button onClick={googleLoginHandle}>Login with Google</button>
         ) : (
